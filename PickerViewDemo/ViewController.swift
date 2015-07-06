@@ -10,17 +10,17 @@ import UIKit
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
   @IBOutlet weak var pickerView: UIPickerView!
-  
+  @IBOutlet weak var currentSelectionLabel: UILabel!
   let pickerViewItems = ["Red", "Green", "Yellow", "Black"]
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    pickerView.dataSource = self
+    pickerView.delegate = self
+    updateCurrentSelectionLabelText()
   }
   
-  // MARK: UIPickerViewDelegate
-  // ----------------------
-  
-  func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+  private func itemForRow(row: Int) -> String? {
     if row < pickerViewItems.count {
       return pickerViewItems[row]
     } else {
@@ -28,8 +28,21 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
   }
   
+  private func updateCurrentSelectionLabelText() {
+    let seletedRow = pickerView.selectedRowInComponent(0)
+    let selectedText = itemForRow(seletedRow) ?? "nothing"
+    currentSelectionLabel.text = "Selected: \(selectedText)"
+  }
+  
+  // MARK: UIPickerViewDelegate
+  // ----------------------
+  
+  func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    return itemForRow(row)
+  }
+  
   func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    
+    updateCurrentSelectionLabelText()
   }
   
   // MARK: UIPickerViewDataSource
