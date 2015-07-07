@@ -8,6 +8,7 @@ class PickerViewDemoUITests: XCTestCase {
     // I can swipe the picker view, but how can I select a **specific** item from it?
     app.pickers.elementAtIndex(0).swipeUp()
     
-    XCTAssert(app.staticTexts["Selected: Black"].exists)
+    // One can also change the picker selection this way
+    app.pickers.elementAtIndex(0).pressForDuration(0.1, thenDragToElement: app.staticTexts["Selected: Black"])
   }
 }
