@@ -1,4 +1,4 @@
-# Selecting a UIPickerView item in UI tests demo iOS app
+# Selecting a UIPickerView item in iOS UI tests
 
 The demo repository is an attempt to test a UIPickerView in UI Tests with XCTest UI testing APIs.
 
